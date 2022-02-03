@@ -1,4 +1,4 @@
-import { useState, useRef } from "react/cjs/react.development";
+import { useState, useRef } from "react";
 import data from "../data.json";
 import { useGlobalContext } from "./context";
 import Replies from "./Replies";

@@ -67,7 +67,7 @@ export const ContextProvider = ({ children }) => {
     setAllComments(updatedReplies);
     setId((prevState) => prevState + 1);
   };
-  
+
   //Stuck with this
   const addNewSubReply = (newReply, id) => {
     const updatedReplies = allComments.map((comment) => {
@@ -82,23 +82,26 @@ export const ContextProvider = ({ children }) => {
           },
           username: comment.user.username,
         },
-        replies: comment.replies.map((reply)=>{
-          if(reply.id === id){
-            return [...reply,{
-              id: id,
-              content: newReply,
-              createdAt: "1s ago",
-              score: 0,
-              replyingTo: comment.user.username,
-              user: {
-                image: {
-                  webp: data.currentUser.image.webp,
+        replies: comment.replies.map((reply) => {
+          if (reply.id === id) {
+            return [
+              ...reply,
+              {
+                id: reply.id,
+                content: newReply,
+                createdAt: "1s ago",
+                score: reply.score,
+                replyingTo: reply.replyingTo,
+                user: {
+                  image: {
+                    webp: data.currentUser.image.webp,
+                  },
+                  username: data.currentUser.username,
                 },
-                username: data.currentUser.username,
               },
-            }]
-          }else return reply
-        })
+            ];
+          } else return reply;
+        }),
       };
     });
     setAllComments(updatedReplies);
